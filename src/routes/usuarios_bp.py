@@ -24,3 +24,29 @@ def registerRoute():
     except Exception as e:
       return jsonify({'status': 'error', 'message': 'Ocurrio un error al registrar al usuario'}), 500
   return jsonify({'status': 'ok', 'message': 'Error al registrar el usuario'}), 500
+
+@usuariosBp.route('/login', methods=['POST'])
+def loginRoute():
+  if request.method == 'POST':
+    try:
+      data = request.form
+      usuario = loginUsuario(data.get('user_name'), data.get('password'))
+      if usuario:
+        return jsonify({'status': 'success', 'message': 'Inicio de sesión correcto', 'user': usuario}), 200
+      return jsonify({'status': 'ok', 'message': 'El nombre de usuario o contrasenia son incorrectos'}), 200
+    except Exception as e:
+      print("Error al iniciar sesión /login: ",e)
+      return jsonify({'status': 'error', 'message': 'Error al iniciar sesión'}), 500
+    
+@usuariosBp.route('/get-user', methods=['POST'])
+def getUserRoute():
+  if request.method == 'POST':
+    try:
+      data = request.form
+      usuario = getUsuario(data.get('id'))
+      if usuario:
+        return jsonify({'status': 'success', 'message': 'Usuario encontrado', 'user': usuario}), 200
+      return jsonify({'status': 'ok', 'message': 'Usuario no encontrado'}), 200
+    except Exception as e:
+      print("Error al obtener el usuario /get-user: ",e)
+      return jsonify({'status': 'error', 'message': 'Error al obtener el usuario'}), 500

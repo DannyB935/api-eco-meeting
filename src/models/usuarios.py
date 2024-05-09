@@ -61,4 +61,40 @@ def registrarUsuario(datos):
   except Exception as e:
     print("Error al registrar el usuario: ",e)
     return False
+  
+def loginUsuario(user_name, password):
+  try:
+    conn = initConn()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+      SELECT nombre, apepat, apemat, id, correo, user_name FROM usuarios WHERE user_name=%s AND password=%s AND eliminado=false
+    """
+    values = (user_name, hashPassword(password))
+    cursor.execute(query, values)
+    usuario = cursor.fetchone()
+    if usuario:
+      return usuario
+    return False
+  except Exception as e:
+    print("Error al iniciar sesion: ",e)
+    return False
 
+def getUsuario(id):
+  try:
+    conn = initConn()
+    cursor = conn.cursor(dictionary=True)
+    query = """
+      SELECT nombre, apepat, apemat, id, correo, user_name FROM usuarios WHERE id=%s AND eliminado=false
+    """
+    values = (id,)
+    cursor.execute(query, values)
+    usuario = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
+    if usuario:
+      return usuario
+    return None
+  except Exception as e:
+    print("Error al obtener el usuario: ",e)
+    return None
