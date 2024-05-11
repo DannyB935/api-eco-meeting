@@ -58,7 +58,7 @@ def deleteTip(id, id_user):
     conn = initConn()
     cursor = conn.cursor()
     query = """
-      UPDATE tips SET eliminado=true WHERE id=%s AND id_usuario=%s AND eliminado=false
+      UPDATE tips SET eliminado=true, last_mod=NOW() WHERE id=%s AND id_usuario=%s AND eliminado=false
     """
     values = (id, id_user)
     cursor.execute(query, values)
