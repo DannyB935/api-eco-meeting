@@ -5,7 +5,7 @@ def getPosts():
   try:
     conn = initConn()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM publicaciones WHERE eliminado=false")
+    cursor.execute("SELECT * FROM publicaciones WHERE eliminado=false ORDER BY created_at DESC")
     posts = cursor.fetchall()
     conn.close()
 
