@@ -67,7 +67,7 @@ def loginUsuario(user_name, password):
     conn = initConn()
     cursor = conn.cursor(dictionary=True)
     query = """
-      SELECT nombre, apepat, apemat, id, correo, user_name FROM usuarios WHERE user_name=%s AND password=%s AND eliminado=false
+      SELECT nombre, apepat, apemat, id, correo, user_name, tipo_usuario FROM usuarios WHERE user_name=%s AND password=%s AND eliminado=false
     """
     values = (user_name, hashPassword(password))
     cursor.execute(query, values)
