@@ -6,16 +6,20 @@ from routes.tips_bp import tipsBp
 from routes.post_bp import postBp
 from routes.contact_bp import contact_bp
 
-app = Flask(__name__)
-app.register_blueprint(usuariosBp)
-app.register_blueprint(tipsBp)
-app.register_blueprint(postBp)
-app.register_blueprint(contact_bp)
-CORS(app, resources={r"/*": {"origins": "*"}})
+def create_app():
 
-@app.route('/')
-def test():
-  return "Ruta de prueba API"
+  app = Flask(__name__)
+  app.register_blueprint(usuariosBp)
+  app.register_blueprint(tipsBp)
+  app.register_blueprint(postBp)
+  app.register_blueprint(contact_bp)
+  CORS(app, resources={r"/*": {"origins": "*"}})
 
-if __name__ == '__main__':
-  app.run(debug=True, host='0.0.0.0')
+  @app.route('/')
+  def test():
+    return "Ruta de prueba API"
+  
+  return app
+
+# if __name__ == '__main__':
+#   app.run(debug=True, host='0.0.0.0')
