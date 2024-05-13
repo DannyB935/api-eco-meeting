@@ -26,6 +26,16 @@ def getUserTipsRoute():
       print("Error al obtener los tips del usuario: ",e)
       return jsonify({'status': 'error', 'message': 'Error al obtener los tips del usuario'}), 500
     
+@tipsBp.route('/tip/<string:id>', methods=['GET'])
+def getTipRoute(id):
+  try:
+    tip = getTip(id)
+    if tip:
+      return jsonify({'status': 'success', 'tip': tip}), 200
+    return jsonify({'status': 'ok', 'message': 'No hay tip'}), 200
+  except Exception as e:
+    return jsonify({'status': 'error', 'message': 'Error al obtener el tip'}), 500
+
 @tipsBp.route('/create-tip', methods=['POST'])
 def createTipRoute():
   if request.method == 'POST':

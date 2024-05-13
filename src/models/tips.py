@@ -29,6 +29,20 @@ def getUserTips(id):
     print("Error al obtener los tips del usuario: ",e)
     return None
   
+def getTip(id):
+  try:
+    conn = initConn()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute('SELECT * FROM tips WHERE id=%s AND eliminado=false', (id,))
+    tip = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
+    return tip
+  except Exception as e:
+    print("Error al obtener el tip: ",e)
+    return None
+
 def createTip(data):
   try:
     conn = initConn()
