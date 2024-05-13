@@ -1,4 +1,4 @@
-from models.contact import *
+from ..models.contact import *
 from flask import Blueprint, request, jsonify
 
 contact_bp = Blueprint('contact_bp', __name__)

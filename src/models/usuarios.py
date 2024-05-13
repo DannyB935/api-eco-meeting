@@ -1,5 +1,5 @@
-from database.main import initConn
-from security.main import *
+from ..database.main import initConn
+from ..security.main import *
 
 def getUsuarios():
   try:

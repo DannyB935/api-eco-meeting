@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from models.tips import *
+from ..models.tips import *
 
 tipsBp = Blueprint('tipsBp', __name__)
 

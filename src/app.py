@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_cors import CORS, cross_origin
 
-from routes.usuarios_bp import usuariosBp
-from routes.tips_bp import tipsBp
-from routes.post_bp import postBp
-from routes.contact_bp import contact_bp
+from .routes.usuarios_bp import usuariosBp
+from .routes.tips_bp import tipsBp
+from .routes.post_bp import postBp
+from .routes.contact_bp import contact_bp
 
 def create_app():
 
